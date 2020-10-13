@@ -5,7 +5,7 @@
       <hr />
     </div>
     <form action="POST">
-      <div class="email pb-4">
+      <ValidationProvider rules="email" v-slot="{ errors }" class="email pb-4">
         <label for="email">Email: </label>
         <input
           class="input"
@@ -14,7 +14,8 @@
           id="email"
           name="email"
         />
-      </div>
+        <span>{{ errors[0] }}</span>
+      </ValidationProvider>
       <div class="password pb-4">
         <label for="password">Password: </label>
         <input

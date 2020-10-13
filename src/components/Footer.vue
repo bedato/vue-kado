@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="content has-text-centered">
       <p>
-        <strong>Kado 2020</strong> by <a href="#">Vedat Demiri</a>. The source code
+        <strong>Kado 2020</strong> by <a href="#">Vedat Demiri</a>. The source
         is
         <a href="https://github.com/bedato/vue-kado">on Github</a>
       </p>

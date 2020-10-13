@@ -1,7 +1,10 @@
 <template>
-  <div class="registration-form column is-one-quarter mx-5 my-5 card px-5 py-5">
+  <div class="container card px-5 py-5">
     <div>
-      <h1 class="is-size-3">Join Kado</h1>
+      <h1 class="is-size-3 mb-5">Join Kado</h1>
+      <p>
+        Registration is quick and easy! Get inspiring Outfit Ideas made for you!
+      </p>
       <hr />
     </div>
     <form action="POST">
@@ -99,18 +102,11 @@ export default {
           )
           .then(function(response) {
             console.log(response);
-          })
-          .catch(function(error) {
-            console.log(error);
+            let invalidUsername = invalidUsername;
+            if (response.data.errors.username) {
+              console.log(this.invalidUsername);
+            }
           });
-      }
-    },
-    checkUsername: function(username) {
-      if (username.length < 2) {
-        console.log('this.invalidUsername');
-        this.invalidUsername = true;
-      } else {
-        this.invalidUsername = false;
       }
     }
   }
