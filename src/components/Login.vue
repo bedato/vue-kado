@@ -1,18 +1,18 @@
 <template>
-  <div class="login-form column is-one-quarter mx-5 my-5 card px-5 py-5">
+  <div>
     <div>
       <h1 class="is-size-3">Login</h1>
       <hr />
     </div>
     <form action="POST">
-      <div class="username pb-4">
-        <label for="username">Username: </label>
+      <div class="email pb-4">
+        <label for="email">Email: </label>
         <input
           class="input"
-          v-model="username"
-          type="text"
-          id="username"
-          name="username"
+          v-model="email"
+          type="email"
+          id="email"
+          name="email"
         />
       </div>
       <div class="password pb-4">
@@ -28,9 +28,7 @@
       <b-button
         class="is-large mt-4 is-fullwidth"
         type="is-primary"
-        v-on:click.prevent="
-          loginUser(username, password, password_confirm, email)
-        "
+        v-on:click.prevent="loginUser(email, password)"
         >Sign In</b-button
       >
     </form>
@@ -48,17 +46,17 @@ let timestamp = Math.floor(Date.now() / 1000).toString();
 export default {
   name: "Register",
   data: () => ({
-    username: "",
+    email: "",
     password: ""
   }),
   methods: {
-    loginUser: function(username, password) {
-      if (username && password) {
+    loginUser: function(email, password) {
+      if (email && password) {
         axios
-          .get(
-            `http://local.kado.com/api/users`,
+          .post(
+            process.env.VUE_APP_API_URL + "login",
             {
-              username: username,
+              email: email,
               password: password
             },
             {

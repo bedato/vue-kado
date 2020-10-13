@@ -6,14 +6,19 @@
     </div>
     <form action="POST">
       <div class="username pb-4">
-        <label for="username">Username: </label>
-        <input
-          class="input"
-          v-model="username"
-          type="text"
-          id="username"
-          name="username"
-        />
+        <b-field
+          label="Username"
+          :type="{ 'is-danger': invalidUsername }"
+          :message="{ 'Your Username is too short!': invalidUsername }"
+        >
+          <b-input
+            v-model="username"
+            type="text"
+            id="username"
+            name="username"
+            v-on:keyup="checkUsername(username)"
+          />
+        </b-field>
       </div>
       <div class="email pb-4">
         <label for="email">E-Mail: </label>
@@ -62,10 +67,8 @@
 
 <script>
 const axios = require("axios");
-const { v4: uuidv4 } = require("uuid");
 
 let timestamp = Math.floor(Date.now() / 1000).toString();
-const user_code = uuidv4();
 
 export default {
   name: "Register",
@@ -73,19 +76,19 @@ export default {
     username: "",
     password: "",
     password_confirm: "",
-    email: ""
+    email: "",
+    invalidUsername: false
   }),
   methods: {
     createUser: function(username, password, password_confirm, email) {
-      if (password == password_confirm) {
+      if ((password, username, password_confirm, email)) {
         axios
           .post(
-            `http://local.kado.com/api/users`,
+            process.env.VUE_APP_API_URL + "users",
             {
               username: username,
               password: password,
-              email: email,
-              user_code: user_code
+              email: email
             },
             {
               headers: {
@@ -100,8 +103,14 @@ export default {
           .catch(function(error) {
             console.log(error);
           });
+      }
+    },
+    checkUsername: function(username) {
+      if (username.length < 2) {
+        console.log('this.invalidUsername');
+        this.invalidUsername = true;
       } else {
-        alert("wrong pw");
+        this.invalidUsername = false;
       }
     }
   }
