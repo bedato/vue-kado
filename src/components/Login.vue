@@ -4,7 +4,7 @@
       <h1 class="is-size-3">Login</h1>
       <hr />
     </div>
-    <form action="POST">
+    <form class="login">
       <ValidationProvider rules="email" v-slot="{ errors }" class="email pb-4">
         <label for="email">Email: </label>
         <input
@@ -28,8 +28,8 @@
       </div>
       <b-button
         class="is-large mt-4 is-fullwidth"
-        type="is-primary"
-        v-on:click.prevent="loginUser(email, password)"
+        type="submit"
+        @click.prevent="login"
         >Sign In</b-button
       >
     </form>
@@ -40,40 +40,45 @@
 </template>
 
 <script>
-const axios = require("axios");
-
-let timestamp = Math.floor(Date.now() / 1000).toString();
+//let timestamp = Math.floor(Date.now() / 1000).toString();
 
 export default {
-  name: "Register",
   data: () => ({
-    email: "",
-    password: ""
+    password: "",
+    email: ""
   }),
   methods: {
-    loginUser: function(email, password) {
-      if (email && password) {
-        axios
-          .post(
-            process.env.VUE_APP_API_URL + "login",
-            {
-              email: email,
-              password: password
-            },
-            {
-              headers: {
-                "X-Request-Timestamp": timestamp,
-                "X-Access-Token": process.env.VUE_APP_API_KEY
-              }
-            }
-          )
-          .then(function(response) {
-            console.log(response);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      }
+    // loginUser: function(email, password) {
+    //   if (email && password) {
+    //     axios
+    //       .post(
+    //         process.env.VUE_APP_API_URL + "login",
+    //         {
+    //           email: "",
+    //           password: ""
+    //         },
+    //         {
+    //           headers: {
+    //             "X-Request-Timestamp": timestamp,
+    //             "X-Access-Token": process.env.VUE_APP_API_KEY
+    //           }
+    //         }
+    //       )
+    //       .then(function(response) {
+    //         console.log(response);
+    //       })
+    //       .catch(function(error) {
+    //         console.log(error);
+    //       });
+    //   }
+    // },
+    login: function() {
+      let email = this.email;
+      let password = this.password;
+      this.$store
+        .dispatch("login", { email, password })
+        .then(() => this.$router.push("/secure"))
+        .catch(err => console.log(err));
     }
   }
 };

@@ -7,19 +7,16 @@
       </p>
       <hr />
     </div>
-    <form action="POST">
+    <form>
       <div class="username pb-4">
-        <b-field
-          label="Username"
-          :type="{ 'is-danger': invalidUsername }"
-          :message="{ 'Your Username is too short!': invalidUsername }"
-        >
+        <b-field label="Username">
           <b-input
             v-model="username"
             type="text"
             id="username"
             name="username"
-            v-on:keyup="checkUsername(username)"
+            required
+            autofocus
           />
         </b-field>
       </div>
@@ -31,6 +28,7 @@
           type="email"
           id="email"
           name="email"
+          required
         />
       </div>
       <div class="password pb-4">
@@ -41,6 +39,7 @@
           type="password"
           id="password"
           name="password"
+          required
         />
       </div>
       <div class="password_confirm pb-4">
@@ -51,14 +50,13 @@
           type="password"
           id="password_confirm"
           name="password_confirm"
+          required
         />
       </div>
       <b-button
         class="is-large mt-4 is-fullwidth"
-        type="is-primary"
-        v-on:click.prevent="
-          createUser(username, password, password_confirm, email)
-        "
+        type="submit"
+        @click.prevent="register"
         >Sign In</b-button
       >
     </form>
@@ -69,45 +67,26 @@
 </template>
 
 <script>
-const axios = require("axios");
-
-let timestamp = Math.floor(Date.now() / 1000).toString();
-
 export default {
   name: "Register",
   data: () => ({
     username: "",
     password: "",
     password_confirm: "",
-    email: "",
-    invalidUsername: false
+    email: ""
   }),
   methods: {
-    createUser: function(username, password, password_confirm, email) {
-      if ((password, username, password_confirm, email)) {
-        axios
-          .post(
-            process.env.VUE_APP_API_URL + "users",
-            {
-              username: username,
-              password: password,
-              email: email
-            },
-            {
-              headers: {
-                "X-Request-Timestamp": timestamp,
-                "X-Access-Token": process.env.VUE_APP_API_KEY
-              }
-            }
-          )
-          .then(function(response) {
-            console.log(response);
-            let invalidUsername = invalidUsername;
-            if (response.data.errors.username) {
-              console.log(this.invalidUsername);
-            }
-          });
-      }
+    register: function() {
+      let data = {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        password_confirm: this.password_confirm
+      };
+      this.$store
+        .dispatch("register", data)
+        .then(() => this.$router.push("/"))
+        .catch(err => console.log(err));
     }
   }
 };
