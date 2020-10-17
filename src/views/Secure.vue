@@ -1,6 +1,8 @@
 <template>
   <div class="user-clothes-select container is-fullheight">
-    <component v-bind:is="component" />
+    <keep-alive>
+      <component v-bind:is="component" />
+    </keep-alive>
     <button v-on:click="toggle">Continue</button>
     <Footer />
   </div>
@@ -11,7 +13,6 @@
 import Footer from "@/components/Footer.vue";
 import SelectItems from "@/components/CategorySelect.vue";
 import ClothesDetailsSelect from "@/components/ClothesDetailsSelect";
-//import ClothesDetailsSelect from "@/components/ClothesDetailsSelect";
 
 export default {
   name: "Secure",

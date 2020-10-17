@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="details">
+      <ClothesDetailsSelect />
+    </div>
     <div class="select-items">
       <h1 class="is-size-3">Let's Go Rockstar!</h1>
       <h2 class="is-size-4">Select your Clothes and get your Outfit soon!</h2>
@@ -8,7 +11,11 @@
       <div
         class="py-3 px-5  mx-4 my-4 has-background-primary categories"
         v-for="categories in info"
-        v-bind:key="categories"
+        :key="categories.category"
+        @click="
+          handleSelectedItem(categories.category);
+          openDetails();
+        "
       >
         {{ categories.category }}
       </div>
@@ -18,6 +25,7 @@
 
 <script>
 import axios from "axios";
+import ClothesDetailsSelect from "@/components/ClothesDetailsSelect";
 
 let timestamp = Math.floor(Date.now() / 1000).toString();
 
@@ -25,8 +33,21 @@ export default {
   name: "SelectItems",
   data() {
     return {
-      info: null
+      selectedItem: "",
+      info: null,
+      details: false
     };
+  },
+  methods: {
+    handleSelectedItem(item) {
+      this.selectedItem = item;
+      console.log(this.selectedItem);
+      this.$store.state.clothes = this.selectedItem;
+      console.log(this.$store.state.clothes);
+    },
+    openDetails() {
+      this.details = true;
+    }
   },
   mounted() {
     console.log(process.env.VUE_APP_API_URL + "styles");
@@ -38,6 +59,9 @@ export default {
         }
       })
       .then(response => (this.info = response.data.data));
+  },
+  components: {
+    ClothesDetailsSelect
   }
 };
 </script>

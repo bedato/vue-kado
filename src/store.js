@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     status: "",
     token: localStorage.getItem("token") || "",
-    user: {}
+    user: {},
+    item: ""
   },
   mutations: {
     auth_request(state) {
