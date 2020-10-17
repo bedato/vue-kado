@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Router from "vue-router";
-import Home from "../views/Home.vue";
 import Welcome from "../views/Welcome.vue";
 import SignIn from "../views/SignIn.vue";
 import store from "../store.js";
@@ -14,16 +13,14 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/welcome",
     name: "Welcome",
-    component: Welcome
+    component: Welcome,
+    meta: {
+      hasUserCode: true
+    }
   },
   {
-    path: "/signin",
+    path: "/sign-in",
     name: "SignIn",
     component: SignIn
   },
@@ -42,12 +39,13 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  // Check if User is logged in
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
       next();
       return;
     }
-    next("/welcome");
+    next("/");
   } else {
     next();
   }

@@ -19,7 +19,7 @@ export default {
   methods: {
     logout: function() {
       this.$store.dispatch("logout").then(() => {
-        this.$router.push("/welcome");
+        this.$router.push("/");
       });
     }
   }

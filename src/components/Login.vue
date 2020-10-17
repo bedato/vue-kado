@@ -34,44 +34,18 @@
       >
     </form>
     <p class="mt-6 ">
-      Not on Kado yet? <router-link to="/signin">Register Here</router-link>
+      Not on Kado yet? <router-link to="/sign-in">Register Here</router-link>
     </p>
   </div>
 </template>
 
 <script>
-//let timestamp = Math.floor(Date.now() / 1000).toString();
-
 export default {
   data: () => ({
     password: "",
     email: ""
   }),
   methods: {
-    // loginUser: function(email, password) {
-    //   if (email && password) {
-    //     axios
-    //       .post(
-    //         process.env.VUE_APP_API_URL + "login",
-    //         {
-    //           email: "",
-    //           password: ""
-    //         },
-    //         {
-    //           headers: {
-    //             "X-Request-Timestamp": timestamp,
-    //             "X-Access-Token": process.env.VUE_APP_API_KEY
-    //           }
-    //         }
-    //       )
-    //       .then(function(response) {
-    //         console.log(response);
-    //       })
-    //       .catch(function(error) {
-    //         console.log(error);
-    //       });
-    //   }
-    // },
     login: function() {
       let email = this.email;
       let password = this.password;

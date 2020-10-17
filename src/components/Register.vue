@@ -61,7 +61,7 @@
       >
     </form>
     <p class="mt-6 ">
-      Already on Kado? <router-link to="/welcome">Click Here</router-link>
+      Already on Kado? <router-link to="/">Click Here</router-link>
     </p>
   </div>
 </template>
