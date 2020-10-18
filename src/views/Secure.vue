@@ -1,5 +1,39 @@
 <template>
-  <div>
-    <h1>This page is protected by auth</h1>
+  <div class="user-clothes-select container is-fullheight">
+    <keep-alive>
+      <component v-bind:is="component" />
+    </keep-alive>
+    <button v-on:click="toggle">Continue</button>
+    <Footer />
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+import Footer from "@/components/Footer.vue";
+import SelectItems from "@/components/CategorySelect.vue";
+import ClothesDetailsSelect from "@/components/ClothesDetailsSelect";
+
+export default {
+  name: "Secure",
+  data() {
+    return {
+      component: "SelectItems"
+    };
+  },
+  methods: {
+    toggle() {
+      if (this.component === SelectItems) {
+        this.component = ClothesDetailsSelect;
+      } else {
+        this.component = SelectItems;
+      }
+    }
+  },
+  components: {
+    SelectItems,
+    Footer,
+    ClothesDetailsSelect
+  }
+};
+</script>
