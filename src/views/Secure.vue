@@ -3,7 +3,6 @@
     <keep-alive>
       <component v-bind:is="component" />
     </keep-alive>
-    <button v-on:click="toggle">Continue</button>
     <Footer />
   </div>
 </template>
@@ -20,15 +19,6 @@ export default {
     return {
       component: "SelectItems"
     };
-  },
-  methods: {
-    toggle() {
-      if (this.component === SelectItems) {
-        this.component = ClothesDetailsSelect;
-      } else {
-        this.component = SelectItems;
-      }
-    }
   },
   components: {
     SelectItems,
