@@ -114,7 +114,7 @@ export default {
         };
         this.$store
           .dispatch("register", data)
-          .then(() => this.$router.push("/secure"))
+          .then(() => this.$router.push("/catwalk"))
           .catch(err => console.log(err));
       }
     },
@@ -141,7 +141,8 @@ export default {
         this.emailValidation === false &&
         this.usernameValidation === false &&
         this.passwordConfirmValidation === false &&
-        this.passwordConfirmValidation === false) {
+        this.passwordConfirmValidation === false
+      ) {
         return (this.formOK = true);
       }
     },

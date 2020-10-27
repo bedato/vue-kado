@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="loginCard">
     <div>
       <h1 class="is-size-3">Login</h1>
       <hr />
@@ -8,7 +8,7 @@
       <b-field
         label="Email"
         :type="{ 'is-danger': emailValidation }"
-        :message="{ 'Please select a correct Email': emailValidation }"
+        :message="{ 'Wrong Email! Please try again': emailValidation }"
       >
         <b-input value="" v-model="email"></b-input>
       </b-field>
@@ -34,6 +34,7 @@
       @click.prevent="
         formValidation();
         login();
+        loginFail();
       "
       >Sign In</b-button
     >
@@ -49,7 +50,8 @@ export default {
     password: "",
     email: "",
     emailValidation: false,
-    passwordValidation: false
+    passwordValidation: false,
+    loginFailed: false
   }),
   methods: {
     login: function() {
@@ -57,8 +59,8 @@ export default {
       let password = this.password;
       this.$store
         .dispatch("login", { email, password })
-        .then(() => this.$router.push("/secure"))
-        .catch(err => console.log(err, this.$store.state.errors));
+        .then(() => this.$router.push("/catwalk"))
+        .catch(err => console.log(err), (this.loginFailed = true));
     },
     formValidation: function() {
       if (!this.email) {
@@ -71,6 +73,11 @@ export default {
         this.passwordValidation = true;
       } else if (!this.password.length > 7) {
         this.passwordValidation = true;
+      }
+    },
+    loginFail: function() {
+      if (this.loginFailed == true) {
+        this.emailValidation = true;
       }
     },
     validEmail: function(email) {

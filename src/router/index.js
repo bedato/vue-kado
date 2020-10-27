@@ -4,7 +4,11 @@ import Router from "vue-router";
 import Welcome from "../views/Welcome.vue";
 import SignIn from "../views/SignIn.vue";
 import store from "../store.js";
-import Secure from "../views/Secure.vue";
+import Secure from "../views/SelectItems.vue";
+import Catwalk from "../views/Catwalk.vue";
+import CreateOutfit from "../views/CreateOutfit.vue";
+import Items from "@/views/Items";
+import Outfits from "@/views/Outfits";
 
 Vue.use(Router);
 
@@ -25,9 +29,41 @@ const routes = [
     component: SignIn
   },
   {
-    path: "/secure",
-    name: "secure",
+    path: "/select-items",
+    name: "select-items",
     component: Secure,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/catwalk",
+    name: "catwalk",
+    component: Catwalk,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/create-outfit",
+    name: "create-outfit",
+    component: CreateOutfit,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/items",
+    name: "items",
+    component: Items,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/outfits",
+    name: "outfits",
+    component: Outfits,
     meta: {
       requiresAuth: true
     }

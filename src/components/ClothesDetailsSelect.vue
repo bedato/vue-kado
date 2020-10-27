@@ -7,6 +7,7 @@
         <b-select
           placeholder="What Season do we have?"
           v-model="selectedSeason"
+          class="select-field"
           rounded
         >
           <option value="Winter">Winter</option>
@@ -154,11 +155,13 @@ export default {
 <style scoped>
 .clothes-modal {
   position: fixed;
+  padding: 3rem;
+  margin-top: 3rem;
   z-index: 1;
   left: 0;
   top: 0;
+  border-radius: 3rem;
   width: 100%;
-  height: 100%;
-  background-color: #7957d5;
+  background-color: #121212;
 }
 </style>

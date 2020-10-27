@@ -3,8 +3,10 @@
     <div class="container">
       <div class=" columns is-centered">
         <div class="mx-5 my-5 px-5 py-5 information column auto">
-          <h1 class="is-size-3 pb-4">Make your own Fashion statement - Kado</h1>
-          <p class="py-4">
+          <h1 class="is-size-3 has-text-light pb-4">
+            Make your own Fashion statement - Kado
+          </h1>
+          <p class="py-4 has-text-light">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci,
             dolores omnis iusto laudantium aspernatur dolor! Necessitatibus
             reprehenderit, ipsum debitis dolorum esse asperiores reiciendis
