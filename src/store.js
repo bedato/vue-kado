@@ -5,13 +5,15 @@ import axios from "axios";
 Vue.use(Vuex);
 
 let timestamp = Math.floor(Date.now() / 1000).toString();
-
 export default new Vuex.Store({
   state: {
     status: "",
     token: localStorage.getItem("token") || "",
     user: {},
-    item: ""
+    item: "",
+    outfit: "",
+    allItems: {},
+    user_id: 123
   },
   mutations: {
     auth_request(state) {
@@ -58,6 +60,7 @@ export default new Vuex.Store({
               console.log("Token stored successfully! " + localStorage);
               resolve(resp);
             } else {
+              this.state.errors = resp.data.message;
               console.log(resp.data.message);
             }
           })
